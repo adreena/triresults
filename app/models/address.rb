@@ -1,10 +1,7 @@
 class Address
 	attr_accessor :city, :state, :location
 
-	def initialize(city,state,location)
-		@city= city
-		@state = state
-		@location = location
+	def initialize()
 	end
 
   	def mongoize
@@ -17,7 +14,11 @@ class Address
 	    when Address then object.mongoize
 	    when Hash then 
 	      if object[:city] 
-	          Address.new(object[:city], object[:state], object[:loc]).mongoize
+	          address = Address.new()
+	          address.city = object[:city]
+	          address.state = object[:state]
+	          address.location = object[:loc]
+	          address.mongoize
 	      end
 	    else object
 	    end
@@ -35,7 +36,11 @@ class Address
 	      if object[:city]
 	      	#puts "hi"
 	      	location = Point.demongoize(object[:loc])
-	        return Address.new(object[:city], object[:state], location)
+	      	address = Address.new()
+	      	address.city = object[:city]
+	      	address.state = object[:state]
+	      	address.location = location
+	        return address
 	      end
 	    else object
 	    end		

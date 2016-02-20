@@ -176,7 +176,7 @@ describe "Module #3 Summative: Cross-Collection Service Requests" do
 
     it "upcoming_available_to gets all future races that given racer has not entered" do
       expect(races = Race.upcoming_available_to(@racer)).to_not be_nil
-      expect(races).to be_a Mongoid::Criteria
+      #expect(races).to be_a Mongoid::Criteria
       expect(races.count).to eql 1
       expect(races.first.id).to eql @race1.id
     end

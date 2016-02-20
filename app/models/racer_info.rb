@@ -19,4 +19,25 @@ class RacerInfo
 
   embedded_in :parent, polymorphic: true
 
+  def city
+    self.residence ? self.residence.city : nil
+  end
+
+  def city= name
+    object=self.residence ||= Address.new
+    object.city=name
+    self.residence=object
+  end
+  
+  ["city", "state"].each do |action|
+    define_method("#{action}") do 
+      self.residence ? self.residence.send("#{action}") : nil
+    end
+    define_method("#{action}=") do |name|
+      object=self.residence ||= Address.new
+      object.send("#{action}=", name)
+      self.residence=object
+    end
+  end
+
 end
