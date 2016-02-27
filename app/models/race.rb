@@ -73,6 +73,7 @@ class Race
 
   def next_bib
   	self.inc(next_bib: 1)
+    return self[:next_bib]
   end
 
   def get_group racer
